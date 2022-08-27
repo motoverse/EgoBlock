@@ -1,9 +1,13 @@
 import * as functions from "firebase-functions";
+import { REGION } from "./lib/constants";
+import { verify } from "./lib/walletAuth";
+import { apiWrapper } from "./lib/api";
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+export const walletAuthVerify = functions.region(REGION).https.onRequest(async (request, response) => {
+    return apiWrapper(request, response, async () => {
+        const { message, signature } = request.body;
+        const result = await verify(message, signature);
+
+        response.json(result);
+    });
+});
