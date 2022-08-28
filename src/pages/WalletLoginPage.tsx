@@ -5,6 +5,7 @@ import { publicProvider } from 'wagmi/providers/public'
 import { createAuthenticationAdapter, getDefaultWallets, RainbowKitAuthenticationProvider, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import '@rainbow-me/rainbowkit/styles.css';
 import { SiweMessage } from 'siwe';
+import { walletAuthNonce, walletAuthVerify } from '../api/functions';
 
 export default function WalletLoginPage() {
     const appName = 'Ego Block'
@@ -22,14 +23,14 @@ export default function WalletLoginPage() {
 
     const authenticationAdapter = createAuthenticationAdapter({
         getNonce: async () => {
-            return new Date().getTime() + '';
+            const nonce = await walletAuthNonce();
+            return nonce;
         },
 
         createMessage: ({ nonce, address, chainId }) => {
             return new SiweMessage({
                 domain: window.location.host,
                 address,
-                // TODO name
                 statement: `Sign in with Ethereum to ${appName}`,
                 uri: window.location.origin,
                 version: '1',
@@ -43,18 +44,9 @@ export default function WalletLoginPage() {
         },
 
         verify: async ({ message, signature }) => {
-            // TODO verify
-
-            console.log('Veryfying', message, signature)
-
+            const token = await walletAuthVerify(message, signature);
+            console.log('got token', token);
             return true;
-            const verifyRes = await fetch('/api/verify', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message, signature }),
-            });
-
-            return Boolean(verifyRes.ok);
         },
 
         signOut: async () => {
