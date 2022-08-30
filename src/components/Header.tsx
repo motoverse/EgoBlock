@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Header() {
     return (
-        <header className="m-2">
+        <header className="p-2 bold text-primary bg-dark">
             EgoBlock
         </header>
     )
