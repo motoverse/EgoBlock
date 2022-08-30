@@ -6,6 +6,7 @@ import { createAuthenticationAdapter, getDefaultWallets, RainbowKitAuthenticatio
 import '@rainbow-me/rainbowkit/styles.css';
 import { SiweMessage } from 'siwe';
 import { walletAuthNonce, walletAuthVerify } from '../api/functions';
+import Header from '../components/Header';
 
 export default function WalletLoginPage() {
     const appName = 'Ego Block'
@@ -70,6 +71,7 @@ export default function WalletLoginPage() {
                 status={'unauthenticated'}
             >
                 <RainbowKitProvider coolMode chains={chains} >
+                    <Header />
                     <ConnectButton />
                 </RainbowKitProvider>
             </RainbowKitAuthenticationProvider>
