@@ -1,7 +1,11 @@
 import React from 'react'
+import TenantHeader from '../components/tenant/TenantHeader'
 
 export default function TenantHomePage() {
     return (
-        <div>TenantHome</div>
+        <div>
+            <TenantHeader />
+            <div>TenantHome</div>
+        </div>
     )
 }

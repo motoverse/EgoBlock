@@ -6,16 +6,19 @@ import {
   Route,
 } from "react-router-dom";
 import TenantHomePage from './pages/TenantHomePage';
-import TenantRoute from './components/TenantRoute';
+import TenantRoute from './components/tenant/TenantRoute';
+import AuthProvider from './contexts/AuthContext';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<TenantRoute><TenantHomePage /></TenantRoute>} />
-        <Route path="/walletAuth" element={<WalletLoginPage />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<TenantRoute><TenantHomePage /></TenantRoute>} />
+          <Route path="/walletAuth" element={<WalletLoginPage />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
