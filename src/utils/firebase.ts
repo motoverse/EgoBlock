@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { connectAuthEmulator, getAuth } from "firebase/auth";
+import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
 import config from "./config";
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -17,4 +18,9 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 if (config.useEmulators) {
     connectAuthEmulator(auth, "http://localhost:9099");
+}
+
+export const db = getFirestore(app);
+if (config.useEmulators) {
+    connectFirestoreEmulator(db, "localhost", 8080);
 }
