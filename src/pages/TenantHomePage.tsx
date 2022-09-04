@@ -4,6 +4,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import TenantHeader from '../components/tenant/TenantHeader'
 import { COLLECTION } from '../constants.ts/firebase';
+import { PAGES } from '../constants.ts/navigation';
 import { useAuth } from '../contexts/AuthContext';
 import { Application, NewApplicationInput } from '../models/Application';
 import { db, fromFirebaseDocs } from '../utils/firebase';
@@ -48,7 +49,7 @@ export default function TenantHomePage() {
                 {applications.map(app => <div key={app.slug} className='card mt-2'>
                     <div className='card-body'>
                         <h5 className='card-title'>{app.name}</h5>
-                        <p className='card-text'>{app.slug}</p>
+                        <small className='card-text'>{`${window.location.href}${app.slug}/${PAGES.walletAuth}`}</small>
                     </div>
                 </div>)}
             </div>
