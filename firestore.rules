@@ -6,6 +6,7 @@ service cloud.firestore {
     }
 
     match /applications/{appId} {
+      allow read: if true;
       allow create: if isAuth();
     }
 

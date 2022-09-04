@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import User from '../models/User';
 import { auth } from '../utils/firebase';
 
@@ -18,25 +18,35 @@ export function useAuth() {
     return useContext(authContext)
 }
 
+const parseUser = (user: any): User => {
+    return {
+        uid: user.uid,
+        displayName: user.displayName,
+    }
+}
+
 export default function AuthProvider({ children }: any) {
-    const [user, setUser] = React.useState<User>({ userId: '', displayName: '' });
+    const [user, setUser] = React.useState<User>({ uid: '', displayName: '' });
+    useEffect(() => {
+        return auth.onAuthStateChanged(data => {
+            setUser(parseUser(data));
+        });
+    }, [])
+
     const authenticate = async (authResult: any) => {
         if (authResult?.user) {
-            setUser({
-                userId: authResult.user.uid,
-                displayName: authResult.user.displayName,
-            });
+            setUser(parseUser(authResult.user));
         }
     }
 
     const logout = async () => {
         await auth.signOut();
-        setUser({ userId: '', displayName: '' });
+        setUser({ uid: '', displayName: '' });
     }
 
     return <authContext.Provider value={{
         user,
-        isAuthenticated: !!user.userId,
+        isAuthenticated: !!user.uid,
         logout,
         authenticate
     }}>
