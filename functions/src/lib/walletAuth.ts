@@ -1,4 +1,5 @@
 import * as functions from "firebase-functions";
+import { generateToken } from "./auth";
 
 interface MessageContent {
     address: string;
@@ -9,7 +10,8 @@ interface VerifyResult {
     accessJWTToken?: string;
 }
 
-export const verify = async (message: MessageContent, signature: string): Promise<VerifyResult> => {
+
+export const verify = async (message: MessageContent, signature: string, appSlug: string): Promise<VerifyResult> => {
     functions.logger.info(`Verifying address: ${message.address} with signature: ${signature}`);
     const { SiweMessage } = require('siwe');
     try {
@@ -20,9 +22,9 @@ export const verify = async (message: MessageContent, signature: string): Promis
         // TODO validate nonce
 
         functions.logger.info('Fields from verify', fields);
+        const accessToken = await generateToken(message.address, appSlug);
 
-        // TODO build JWT token
-        const accessToken = '123'
+        functions.logger.info('Generated Token');
         return {
             ok: true,
             accessJWTToken: accessToken

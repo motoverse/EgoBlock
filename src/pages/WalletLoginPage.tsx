@@ -7,8 +7,12 @@ import '@rainbow-me/rainbowkit/styles.css';
 import { SiweMessage } from 'siwe';
 import { walletAuthNonce, walletAuthVerify } from '../api/functions';
 import Header from '../components/Header';
+import { parseQueryParam } from '../hooks/useQueryParams';
+import { useApplication } from '../contexts/ApplicationContext';
 
 export default function WalletLoginPage() {
+    const { redirectUrl } = parseQueryParam();
+    const { application } = useApplication();
     const appName = 'Ego Block'
 
 
@@ -45,8 +49,10 @@ export default function WalletLoginPage() {
         },
 
         verify: async ({ message, signature }) => {
-            const token = await walletAuthVerify(message, signature);
-            console.log('got token', token);
+            const token = await walletAuthVerify(message, signature, application.slug);
+
+            const fullRedirectUrl = `${redirectUrl}?access_token=${token}`;
+            window.location.href = fullRedirectUrl;
             return true;
         },
 

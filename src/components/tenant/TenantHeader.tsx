@@ -7,9 +7,9 @@ export default function TenantHeader() {
     return (
         <header className="p-2 bold text-primary bg-dark">
             <div className='d-flex align-items-center'>
-                <div className='flex-grow-1'>EgoBlock</div>
+                <div className='flex-grow-1 m-2'>EgoBlock</div>
                 <div>{user.displayName}</div>
-                <button className='btn btn-secondary ms-2' onClick={logout}>Logout</button>
+                {user.uid && <button className='btn btn-secondary ms-2' onClick={logout}>Logout</button>}
             </div>
         </header>
     )

@@ -59,3 +59,9 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 .flex-1 {
     flex: 1
 }
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}

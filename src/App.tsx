@@ -4,7 +4,6 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  useParams,
 } from "react-router-dom";
 import TenantHomePage from './pages/TenantHomePage';
 import TenantRoute from './components/tenant/TenantRoute';

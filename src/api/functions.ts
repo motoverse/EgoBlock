@@ -17,12 +17,12 @@ interface VerifyResult {
     accessJWTToken?: string;
 }
 
-export const walletAuthVerify = async (message: any, signature: string): Promise<string> => {
+export const walletAuthVerify = async (message: any, signature: string, appSlug: string): Promise<string> => {
     const endpoint = `${BASE_URL}/walletAuthVerify`;
 
     const response = await fetch(endpoint, {
         method: 'POST',
-        body: JSON.stringify({ message, signature })
+        body: JSON.stringify({ message, signature, appSlug })
     });
 
     const json: VerifyResult = await response.json();

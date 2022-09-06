@@ -5,6 +5,7 @@ import { auth } from '../utils/firebase'
 import { GithubAuthProvider, GoogleAuthProvider, TwitterAuthProvider } from 'firebase/auth';
 import firebaseui from 'firebaseui';
 import { useAuth } from '../contexts/AuthContext';
+import TenantHeader from '../components/tenant/TenantHeader';
 
 
 export default function TenantLoginPage() {
@@ -22,7 +23,7 @@ export default function TenantLoginPage() {
     };
     return (
         <div>
-            <Header />
+            <TenantHeader />
             <div>TenantLogin</div>
             <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
         </div>

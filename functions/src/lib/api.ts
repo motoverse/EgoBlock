@@ -5,7 +5,7 @@ export const apiWrapper = async (request: functions.https.Request, response: fun
     const cors = corsBuilder({ origin: true });
     return cors(request, response, async () => {
         try {
-            return handler(request, response);
+            return await handler(request, response);
         } catch (error) {
             functions.logger.error('Error:', error);
             response.status(500).send(error);
