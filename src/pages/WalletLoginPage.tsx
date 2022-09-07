@@ -1,7 +1,5 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit'
-import React from 'react'
-import { chain, configureChains, createClient, WagmiConfig } from 'wagmi';
-import { publicProvider } from 'wagmi/providers/public'
+import { Chain, configureChains, createClient, WagmiConfig } from 'wagmi';
 import { createAuthenticationAdapter, getDefaultWallets, RainbowKitAuthenticationProvider, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import '@rainbow-me/rainbowkit/styles.css';
 import { SiweMessage } from 'siwe';
@@ -9,6 +7,27 @@ import { walletAuthNonce, walletAuthVerify } from '../api/functions';
 import Header from '../components/Header';
 import { parseQueryParam } from '../hooks/useQueryParams';
 import { useApplication } from '../contexts/ApplicationContext';
+import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
+
+const QUIK_NODE_RPC = "https://wispy-shy-smoke.avalanche-mainnet.discover.quiknode.pro/1f4cbbaec8cf19851402915fea59cf9b20a7cfbf/";
+
+const avalancheChain: Chain = {
+    id: 43_114,
+    name: 'Avalanche',
+    network: 'avalanche',
+    nativeCurrency: {
+        decimals: 18,
+        name: 'Avalanche',
+        symbol: 'AVAX',
+    },
+    rpcUrls: {
+        default: QUIK_NODE_RPC,
+    },
+    blockExplorers: {
+        default: { name: 'SnowTrace', url: 'https://snowtrace.io' },
+    },
+    testnet: false,
+}
 
 export default function WalletLoginPage() {
     const { redirectUrl } = parseQueryParam();
@@ -17,8 +36,12 @@ export default function WalletLoginPage() {
 
 
     const { chains, provider, webSocketProvider } = configureChains(
-        [chain.mainnet, chain.polygon],
-        [publicProvider()],
+        [avalancheChain],
+        [
+            jsonRpcProvider({
+                rpc: (chain) => ({ http: chain.rpcUrls.default })
+            })
+        ],
     )
 
     const { connectors } = getDefaultWallets({

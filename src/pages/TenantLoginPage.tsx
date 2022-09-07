@@ -1,5 +1,4 @@
 import React from 'react'
-import Header from '../components/Header'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { auth } from '../utils/firebase'
 import { GithubAuthProvider, GoogleAuthProvider, TwitterAuthProvider } from 'firebase/auth';
