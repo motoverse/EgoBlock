@@ -21,7 +21,7 @@ export function useApplication() {
 
 export default function ApplicationProvider({ children }: any) {
     const { applicationSlug } = useParams<{ applicationSlug: string }>();
-    const [application, setApplication] = React.useState<Application>({ slug: '', name: '', owner: '' });
+    const [application, setApplication] = React.useState<Application>({ id: '', slug: '', name: '', owner: '', authWalletCount: 0 });
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         const q = query(collection(db, COLLECTION.applications), where("slug", "==", applicationSlug));

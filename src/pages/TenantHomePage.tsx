@@ -2,12 +2,14 @@ import { addDoc, collection, onSnapshot, query, where } from 'firebase/firestore
 import React, { useEffect, useState } from 'react'
 import { Button, Modal } from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import TenantHeader from '../components/tenant/TenantHeader'
 import { COLLECTION } from '../constants.ts/firebase';
 import { PAGES } from '../constants.ts/navigation';
 import { useAuth } from '../contexts/AuthContext';
 import { Application, NewApplicationInput } from '../models/Application';
 import { db, fromFirebaseDocs } from '../utils/firebase';
+import { getWalletAuthURL } from '../utils/tenant';
 
 export default function TenantHomePage() {
     const [showNewAppPopup, setShowNewAppPopup] = React.useState(false);
@@ -28,6 +30,7 @@ export default function TenantHomePage() {
             slug,
             name: data.name,
             owner: user?.uid || '',
+            authWalletCount: 0,
         });
         setShowNewAppPopup(false);
     };
@@ -48,8 +51,18 @@ export default function TenantHomePage() {
 
                 {applications.map(app => <div key={app.slug} className='card mt-2'>
                     <div className='card-body'>
-                        <h5 className='card-title'>{app.name}</h5>
-                        <small className='card-text'>{`${window.location.href}${app.slug}/${PAGES.walletAuth}`}</small>
+                        <div className='d-flex justify-content-between '>
+                            <div>
+                                <h5 className='card-title'>{app.name}</h5>
+                                <small className='card-text'>{getWalletAuthURL(app.slug)}</small>
+                            </div>
+                            <div className='d-flex flex-column justify-content-between align-items-end'>
+                                <div className={`badge mb-2 rounded-pill ${app.authWalletCount ? 'bg-success' : 'bg-secondary'}`}>{app.authWalletCount || 0}</div>
+                                <Link to={`${PAGES.applications}/${app.id}`}>
+                                    <button className='btn btn-secondary'>Info</button>
+                                </Link>
+                            </div>
+                        </div>
                     </div>
                 </div>)}
             </div>

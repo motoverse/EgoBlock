@@ -10,6 +10,7 @@ import TenantRoute from './components/tenant/TenantRoute';
 import AuthProvider from './contexts/AuthContext';
 import ApplicationProvider from './contexts/ApplicationContext';
 import { PAGES } from './constants.ts/navigation';
+import ApplicationPage from './pages/ApplicationPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<TenantRoute><TenantHomePage /></TenantRoute>} />
+          <Route path={`/${PAGES.applications}/:applicationId`} element={<TenantRoute><ApplicationPage /></TenantRoute>} />
           <Route path={`/:applicationSlug/*`} element={<TenantApp />} />
         </Routes>
       </BrowserRouter>

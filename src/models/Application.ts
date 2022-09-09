@@ -4,8 +4,10 @@ export interface NewApplicationInput {
 }
 
 export interface Application {
+    id: ''
     name: string;
     slug: string;
     owner: string;
+    authWalletCount: number
 }
 

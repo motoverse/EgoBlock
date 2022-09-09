@@ -101,7 +101,9 @@ export default function WalletLoginPage() {
             >
                 <RainbowKitProvider coolMode chains={chains} >
                     <Header />
-                    <ConnectButton />
+                    <div className='center mt-5'>
+                        <ConnectButton />
+                    </div>
                 </RainbowKitProvider>
             </RainbowKitAuthenticationProvider>
         </WagmiConfig>

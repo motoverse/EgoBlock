@@ -35,12 +35,6 @@ export const incrementAuthWalletCount = async (appId: string) => {
 }
 
 
-function toFirebaseDoc<Type>(obj: Type): any {
-    const data: any = { ...obj };
-    delete data.id;
-    return data;
-}
-
 function fromFirebaseDoc<Type>(doc: any): Type {
     const data = doc.data();
 
