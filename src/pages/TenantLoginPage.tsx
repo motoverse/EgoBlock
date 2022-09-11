@@ -1,6 +1,7 @@
 import React from 'react'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { auth } from '../utils/firebase'
+import logoSrc from '../assets/egoblock_black.svg'
 import { GithubAuthProvider, GoogleAuthProvider, TwitterAuthProvider } from 'firebase/auth';
 import firebaseui from 'firebaseui';
 import { useAuth } from '../contexts/AuthContext';
@@ -21,10 +22,22 @@ export default function TenantLoginPage() {
         ],
     };
     return (
-        <div>
-            <TenantHeader />
-            <div>TenantLogin</div>
-            <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
+        <div className="container m-auto">
+            <div className="row gx-5 align-items-center justify-content-center">
+                <div className="col-5">
+                    <div className="">
+                        <img src={logoSrc} />
+                        <h2 className="h2_login">Start building <br />something awesome!</h2>
+                    </div>
+                </div>
+                <div className="col-5">
+                    <div className="shadow p-5 bg-body rounded text-center">
+                        <h3>Sign up</h3>
+                        <p className="mb-5">Lorem impusm dolor sit amet.</p>
+                        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

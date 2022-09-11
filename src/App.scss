@@ -42,6 +42,12 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 
 @import "../node_modules/bootstrap/scss/utilities/api";
 
+html, body{
+    height: 100%;
+    background: #f0f1f2;
+    font-family: 'Roboto', sans-serif;
+}
+
 .bold {
     font-weight: bold;
 }
@@ -64,4 +70,10 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+}
+
+.h2_login{
+    font-weight: 100;
+    font-size: 3rem;
+    margin-top: 3rem;
 }
