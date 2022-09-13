@@ -23,7 +23,9 @@ const fetchNFTs = async (address: string): Promise<GraphWallet> => {
                     wallets(where: {id: "${address}"}) {
                         id
                         tokens {
-                        id
+                            tokenId
+                            contractAddress
+                            tokenURI
                         }
                     }
                 }`,
