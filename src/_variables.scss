@@ -1,9 +1,9 @@
-$red: #e10600;
+$custom_yellow: #FCA311;
 $green: #4cae04;
 $grey-dark: #808080;
 $grey-logo: #4c5560;
 $grey-light: #DDDDDD;
-$blue-dark: #12151C;
+$blue-dark: #14213D;
 
 $see-through: rgba(8, 8, 9, 0.6);
 
@@ -14,7 +14,7 @@ $param-purple: #480078;
 $param-red: #780E00;
 
 // Create your own map
-$custom-colors: ("primary": $red,
-        "green": $green);
+$custom-colors: ("primary": $custom_yellow,
+        "secondary": $blue-dark);
 
-$link-color: $red
+//$link-color: $primary

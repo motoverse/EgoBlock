@@ -24,19 +24,20 @@ export default function TenantLoginPage() {
     return (
         <div className="container m-auto">
             <div className="row gx-5 align-items-center justify-content-center">
-                <div className="col-5">
-                    <div className="">
-                        <img src={logoSrc} />
-                        <h2 className="h2_login">Start building <br />something awesome!</h2>
-                    </div>
-                </div>
-                <div className="col-5">
+                <div className="col-lg-5 order-lg-2">
                     <div className="shadow p-5 bg-body rounded text-center">
                         <h3>Sign up</h3>
                         <p className="mb-5">Lorem impusm dolor sit amet.</p>
                         <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
                     </div>
                 </div>
+                <div className="col-lg-5 order-lg-1">
+                    <div className="">
+                        <img src={logoSrc} />
+                        <h2 className="h2_login">Start building <br />something awesome!</h2>
+                    </div>
+                </div>
+
             </div>
         </div>
     )

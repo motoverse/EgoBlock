@@ -39,10 +39,10 @@ export default function TenantHomePage() {
     return (
         <div>
             <TenantHeader />
-            <div className='container mt-2'>
+            <div className='container'>
                 <div className='d-flex justify-content-between align-items-center'>
                     <div>
-                        <h2>⚔️ Applications</h2>
+                        <h1 className="h2">Applications</h1>
                         <p>It's Dangerous to Go Alone! Take this application</p>
 
                     </div>
@@ -53,11 +53,13 @@ export default function TenantHomePage() {
                     <div className='card-body'>
                         <div className='d-flex justify-content-between '>
                             <div>
-                                <h5 className='card-title'>{app.name}</h5>
+                                <h5 className='card-title'>
+                                    {app.name}
+                                    <span className={`badge ms-2 rounded-pill ${app.authWalletCount ? 'bg-success' : 'bg-secondary'}`}>{app.authWalletCount || 0}</span>
+                                </h5>
                                 <small className='card-text'>{getWalletAuthURL(app.slug)}</small>
                             </div>
                             <div className='d-flex flex-column justify-content-between align-items-end'>
-                                <div className={`badge mb-2 rounded-pill ${app.authWalletCount ? 'bg-success' : 'bg-secondary'}`}>{app.authWalletCount || 0}</div>
                                 <Link to={`${PAGES.applications}/${app.id}`}>
                                     <button className='btn btn-secondary'>Info</button>
                                 </Link>
