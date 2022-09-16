@@ -5,7 +5,6 @@ import logoSrc from '../assets/egoblock_black.svg'
 import { GithubAuthProvider, GoogleAuthProvider, TwitterAuthProvider } from 'firebase/auth';
 import firebaseui from 'firebaseui';
 import { useAuth } from '../contexts/AuthContext';
-import TenantHeader from '../components/tenant/TenantHeader';
 
 
 export default function TenantLoginPage() {
@@ -33,7 +32,7 @@ export default function TenantLoginPage() {
                 </div>
                 <div className="col-lg-5 order-lg-1">
                     <div className="">
-                        <img src={logoSrc} />
+                        <img src={logoSrc} alt="egoBlock" />
                         <h2 className="h2_login">Start building <br />something awesome!</h2>
                     </div>
                 </div>
