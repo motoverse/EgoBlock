@@ -1,5 +1,6 @@
 import React from 'react'
-import {useAuth} from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
+import logoImageSrc from '../../assets/logo.svg'
 import logoSrc from '../../assets/egoblock_white.svg'
 
 import { Container, Navbar } from "react-bootstrap";
@@ -7,13 +8,14 @@ import { Container, Navbar } from "react-bootstrap";
 
 
 export default function TenantHeader() {
-    const {user, logout} = useAuth();
+    const { user, logout } = useAuth();
 
     return (
 
         <Navbar bg="dark" variant="dark" expand="lg" className="p-3 mb-5">
             <Container>
                 <Navbar.Brand >
+                    <img src={logoImageSrc} alt="egoBlock" className="me-2" style={{ width: '30px' }} />
                     <img src={logoSrc} alt="egoblock" className="d-inline-block align-text-top logo" />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
